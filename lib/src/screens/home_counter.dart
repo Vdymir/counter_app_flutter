@@ -30,42 +30,55 @@ class _CounterState extends State<CounterPage> {
             ),
             Text(
               "$counter",
-              style: TextStyle(color: Colors.black, fontSize: 25),
+              style: const TextStyle(color: Colors.black, fontSize: 25),
             )
           ],
         )),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            FloatingActionButton(
-              onPressed: () {
-                setState(() {
-                  counter++;
-                });
-              },
-              backgroundColor: Colors.yellow[600],
-              child: const Icon(Icons.add),
-            ),
-            FloatingActionButton(
-              onPressed: () {
-                setState(() {
-                  counter = 0;
-                });
-              },
-              backgroundColor: Colors.yellow[600],
-              child: const Icon(Icons.restart_alt),
-            ),
-            FloatingActionButton(
-              onPressed: () {
-                setState(() {
-                  counter--;
-                });
-              },
-              backgroundColor: Colors.yellow[600],
-              child: const Icon(Icons.close),
-            ),
-          ],
-        ));
+        floatingActionButton: _generateButtons());
+  }
+
+  Widget _generateButtons() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        const SizedBox(width: 30),
+        FloatingActionButton(
+          onPressed: _add,
+          backgroundColor: Colors.yellow[600],
+          child: const Icon(Icons.add),
+        ),
+        const Expanded(child: SizedBox()),
+        FloatingActionButton(
+          onPressed: _reset,
+          backgroundColor: Colors.yellow[600],
+          child: const Icon(Icons.restart_alt),
+        ),
+        const SizedBox(width: 5),
+        FloatingActionButton(
+          onPressed: _subtract,
+          backgroundColor: Colors.yellow[600],
+          child: const Icon(Icons.close),
+        ),
+      ],
+    );
+  }
+
+  void _add() {
+    setState(() {
+      counter++;
+    });
+  }
+
+  void _reset() {
+    setState(() {
+      counter = 0;
+    });
+  }
+
+  void _subtract() {
+    setState(() {
+      counter--;
+    });
   }
 }
